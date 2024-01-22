@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <title>Motor Garage</title>
+  </head>
+
+  <body style="font-family:Tahoma, sans-serif;">
+    <div style="overflow:hidden;" id="wrap">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light border-bottom border-success" style="background-color:black;">
+        <a class="navbar-brand text-success" href="{{url_for('main.index')}}">Motor Garage</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" style="background-color:green;border-radius:4px;"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-success" href="{{url_for('main.index')}}">HOME</a><span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-success" href="{{url_for('main.order')}}"><i class="fa-sharp fa-solid fa-cart-shopping"></i>Cart</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-success" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Category
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{url_for('main.category',categoryid=1)}}">Wheel</a>
+                <a class="dropdown-item" href="{{url_for('main.category',categoryid=2)}}">Exhaust System</a>                
+                <a class="dropdown-item" href="{{url_for('main.category',categoryid=3)}}">Brake</a>
+              </div>
+            </li>            
+          </ul>
+          <form class="form-inline my-2 my-lg-0" action="{{url_for('main.search')}}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success my-2 my-sm-0 text-white" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-primary" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %} 
+
+      {% block head %}{% endblock %}
+
+    </header>
+
+    <main style="background-color:black;color:white;">
+        {% block main %}{% endblock %}
+    </main>
+
+    <footer style="background-color:black;padding-top:230px;">
+      <div class="text-center py-2 bg-dark">
+        <span class="text-success">Copyright &copy; 2022</span>
+    </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </div>
+  </body>
+</html>

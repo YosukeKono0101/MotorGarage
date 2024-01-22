@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+    <main style="background-color:black;">
+      <!-- Items section-->
+      <section>
+        <div>
+          <h1 class="mt-auto pt-3 pb-3  text-success" style="text-align:center;">{{ categories.name }}</h1>
+        </div>       
+        <div class="container bg-dark text-white">
+            <div style="margin-top:130px;">
+                <div class="row hedding m-0 pl-3 pt-3 pb-0">                    
+                </div>
+                <div class="row m-0 pt-1">
+                    <div class="col-lg-4 left-side-product-box pb-3">
+                        <img style="width:100%;" src="{{url_for('static',filename='image/'+item.image)}}">                    
+                    </div>
+                    <div class="col-lg-8 pb-3">
+                        <div class="right-side-pro-detail m-0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p class="m-0 p-0">{{ item.name }}</p>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p class="m-0 p-0 price-pro">${{ item.price }}</p>
+                                    <hr class="p-0 m-0">
+                                </div>
+                                <div class="col-lg-12 pt-2">
+                                    <h5>Product Detail</h5>
+                                    <span>{{ item.description }}</span>
+                                    <hr class="m-0 pt-2 mt-2">
+                                <div class="col-lg-12 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6 pb-2">
+                                            <a href="{{ url_for('main.category',categoryid=item.category_id) }}" class="btn btn-danger w-100">Go Back</a>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <form action=" {{ url_for('main.order') }} ">
+                                                <input type="hidden" id="item_id" name="item_id" value="{{ item.id }}">
+                                                <input class="btn btn-success w-100" type="submit" value="Add to cart">
+                                              </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>         
+            </div>
+        </div>
+        </section>  
+      <!-- End of Items Section-->      
+    </main>
+    
+{% endblock %}

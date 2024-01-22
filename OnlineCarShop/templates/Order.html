@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    
+<main style="background-color:black;color:white;">
+  <div class="row co-12 pt-3 mb-2" style="padding-left:40px;">
+    <h2>Shopping Cart</h2>
+  </div>
+  <div class="container bg-dark text-white">    
+    {% for item in order.items%}
+    <div>
+        <div class="row hedding m-0 pl-3 pt-3 pb-0">                    
+        </div>
+        <div class="row m-0 pt-1">
+            <div class="col-lg-4 left-side-product-box pb-3">
+                <img style="width:100%;" src="{{url_for('static',filename='image/'+item.image)}}">                    
+            </div>
+            <div class="col-lg-8 pb-3">
+                <div class="right-side-pro-detail m-0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="m-0 p-0">{{ item.name }}</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p class="m-0 p-0 price-pro">${{ item.price }}</p>
+                            <hr class="p-0 m-0">
+                        </div>
+                        <div class="col-lg-12 pt-2">
+                            <h5>Product Detail</h5>
+                            <span>{{ item.description }}</span>
+                            <hr class="m-0 pt-2 mt-2">        
+                        </div>
+                    </div>
+                </div>
+            </div>         
+        </div>
+    </div>
+    <br><br>
+    <div class="col-sm-2">
+        <h5>{{ "$%.2f"|format(item.price) }}</h5>
+        <form method="POST" action="{{url_for('main.removeitem')}}">
+          <input type="hidden" id="id" name="id" value="{{item.id}}">
+          <input type="submit" value="Delete" class="btn btn-danger mb-3">
+        </form>
+  </div>
+    {% endfor %}
+</div>
+<section class="pt-5">
+  <div class="row co-12 bg-dark" style="background-color:black;padding-left:60px;">
+    <h5 class="mt-4 text-light" >   Total Price : {{ "$%.2f"|format(totalprice) }}</h5>
+  </div>
+  
+  <div style="background-color:black;padding-top:30px; padding-left:60px;">
+    <a href="{{ url_for('main.index') }}" class="btn btn-success ml-2">HOME</a>
+    <a href="{{ url_for('main.placeorder')}}" class="btn btn-success ml-2">Checkout</a>
+    <a href="{{ url_for('main.removeorder')}}" class="btn btn-danger ml-2">Remove all items</a>
+  </div>
+</section>
+
+
+</main>
+
+{% endblock %}
+
+
+
+  <!-- <div class="container" style="width:100%;">
+      <div class="row co-12 d-flex pt-3 mb-2">
+          <h3>Shopping Cart</h3>
+      </div>
+  {% for item in order.items %}    
+      <div class="row shadow-md my-row mb-3 mx-10" >
+        <h5 class="card-header">{{ item.name }}</h5>
+        <div class="card-body">
+            <div class="row">
+              <img class="img-thumbnail" style="height:300px;" src="{{ url_for('static',filename=('image/'+item.image))}}">
+            </div>
+            <div class="col-10">
+              <p class="card-text">{{ item.description }}</p>
+            </div>
+        </div>
+      </div>
+      <br><br>
+      <div class="col-sm-2">
+            <h5>{{ "$%.2f"|format(item.price) }}</h5>
+            <form method="POST" action="{{url_for('main.removeitem')}}">
+              <input type="hidden" id="id" name="id" value="{{item.id}}">
+              <input type="submit" value="Delete" class="btn btn-danger mb-3">
+            </form>
+      </div>   
+  
+  {% endfor %}
+</div> -->

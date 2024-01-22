@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<main style="background-color:black;;">
+      <!-- Items Section-->
+    <section >
+        <div>
+          <h1 class="mt-auto pt-3 pb-3  text-success" style="text-align:center;">{{ categories.name }}</h1>
+        </div>       
+        
+        <section class="py-5">
+          <div class="container px-4 px-lg-5 mt-5">
+              <div style="margin-left:0px !important;margin-right:0px !important;" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for item in items %} 
+                
+                <article>
+                   <div class="col mb-5">
+                        <div class="card h-100 bg-dark">
+                         <img style="width:100%;height:200px;" class="card-img-top" src="{{url_for('static',filename='image/'+item.image)}}" />
+                            <div class="card-body p-4">
+                                <div class="text-center text-white">
+                                    <h5 class="fw-bolder">{{ item.name }}</h5>
+                                 ${{ item.price }}
+                                </div>
+                            </div>
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-success mt-auto" href="{{ url_for('main.item',itemid=item.id) }}">View details</a></div>
+                </div>
+                
+                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                  <div class="text-center">
+                  <form action=" {{ url_for('main.order') }} ">
+                    <input type="hidden" id="item_id" name="item_id" value="{{ item.id }}">
+                    <input class="btn btn-outline-success mt-auto" type="submit" value="Add to cart">
+                  </form>
+                </div>
+            </div>
+        </div>
+        </article>
+        {% endfor %}
+             </div>
+        </div>
+      </section>
+      <!-- End of Items Section-->      
+    {% endblock %}
